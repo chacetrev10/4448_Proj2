@@ -4,10 +4,18 @@ public class Animal{
 	//This allows us to use the 'name' variable in subclasses of Animal but nothing
 	//outside can access.
 	protected String name;
-	WakeUpBehavior wakeUpBehavior;
+	
+	//Strategy pattern: define the variable that will hold each animal's wake behavior.
+	//The two methods below this comment call the specified behavior's wake method as well as 
+	//give you the oppurtunity to change wakeUp behavior at runtime. 
+	protected WakeUpBehavior wakeUpBehavior;
 	
 	void wakeUp() {
 		wakeUpBehavior.wake();
+	}
+	
+	void setWakeUpBehavior(WakeUpBehavior wakeUp) {
+		this.wakeUpBehavior  = wakeUp;
 	}
 	void makeNoise() {
 		System.out.println(name + " makes noise");

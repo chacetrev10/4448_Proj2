@@ -41,8 +41,6 @@ public class Proj2 {
 		
 //	Uncomment this is you want the output printed to a file
 //	Referenced https://stackoverflow.com/questions/1994255/how-to-write-console-output-to-a-txt-file
-//		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
-//		System.setOut(out);
 		
 	
 		for(int day = 0; day < numOfDays; day++) {
