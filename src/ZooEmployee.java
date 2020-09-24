@@ -7,13 +7,6 @@ abstract class ZooEmployee {
 	//subclasses can create the functionality. 
 	abstract void goToWork(String day);
 
-	abstract void wakeUpAnimal(String name);
-
-	abstract void sleepAnimal(String name);
-
-	void countAnimal(String name) {
-		System.out.println(name + " is counted for roll call");
-	}
 
 	void leaveZoo(String day) {
 		System.out.println("Employee leaves zoo on day " + day);

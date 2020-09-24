@@ -1,10 +1,11 @@
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
 public class Proj2 {
 	
-	public static void main(String[]args) {
+	public static void main(String[]args) throws FileNotFoundException {
 		System.out.println("Please enter the number of days you want to simulate at the zoo");
 		Scanner input = new Scanner(System.in);
 		int numOfDays = input.nextInt();
@@ -40,8 +41,8 @@ public class Proj2 {
 		
 //	Uncomment this is you want the output printed to a file
 //	Referenced https://stackoverflow.com/questions/1994255/how-to-write-console-output-to-a-txt-file
-		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
-		System.setOut(out);
+//		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
+//		System.setOut(out);
 		
 	
 		for(int day = 0; day < numOfDays; day++) {

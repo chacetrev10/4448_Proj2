@@ -4,9 +4,10 @@ public class Animal{
 	//This allows us to use the 'name' variable in subclasses of Animal but nothing
 	//outside can access.
 	protected String name;
+	WakeUpBehavior wakeUpBehavior;
 	
 	void wakeUp() {
-		System.out.println(name + " wakes up");
+		wakeUpBehavior.wake();
 	}
 	void makeNoise() {
 		System.out.println(name + " makes noise");

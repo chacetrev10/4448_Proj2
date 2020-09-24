@@ -1,6 +1,6 @@
 
-public //Provides implementation for abstract method inherited and has its own methods specific to a zookeeper
-class ZooKeeper extends ZooEmployee {
+//Provides implementation for abstract method inherited and has its own methods specific to a zookeeper
+public class ZooKeeper extends ZooEmployee {
 
 	void goToWork(String day) {
 		System.out.println("Zookeeper arrives to zoo on day " + day);
@@ -25,5 +25,8 @@ class ZooKeeper extends ZooEmployee {
 	@Override
 	void leaveZoo(String day) {
 		System.out.println("Zookeeper leaves zoo on day " + day);
+	}
+	void countAnimal(String name) {
+		System.out.println(name + " is counted for roll call");
 	}
 }

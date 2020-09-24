@@ -1,5 +1,9 @@
 
 public class Feline extends Animal{	
+	
+	public Feline() {
+		super.wakeUpBehavior = new PeacefulWakeUp();
+	}
 	@Override
 	void sleep() {
 		double sleep_chance = Math.random();
@@ -11,4 +15,5 @@ public class Feline extends Animal{
 			System.out.println(name + " goes to sleep");
 		}
 	}
+	
 }

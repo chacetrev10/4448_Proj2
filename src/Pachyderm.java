@@ -1,5 +1,8 @@
 
 public class Pachyderm extends Animal{
+	public Pachyderm() {
+		super.wakeUpBehavior = new StartledWakeUp();
+	}
 	@Override
 	void roam() {
 		//Used this website as a reference to generate random numbers.
