@@ -1,11 +1,12 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class Proj2 {
 	
-	public static void main(String[]args) throws FileNotFoundException {
+	public static void main(String[]args) throws FileNotFoundException, ParseException {
 		System.out.println("Please enter the number of days you want to simulate at the zoo");
 		Scanner input = new Scanner(System.in);
 		int numOfDays = input.nextInt();
@@ -44,11 +45,14 @@ public class Proj2 {
 		
 	
 		for(int day = 0; day < numOfDays; day++) {
+			ZooClock dayClock = new ZooClock();
 			String strDay = String.valueOf(day+1); 
 			keeper.goToWork(strDay);
+			
 			//Polymorphism: although all of these objects in the zoo are different species
 			//they are all still animals, so can call the same methods. 
 			for(Animal x: zoo) {
+				dayClock.announceTime();
 				keeper.wakeUpAnimal(x.name);
 				x.wakeUp();
 				keeper.countAnimal(x.name);
