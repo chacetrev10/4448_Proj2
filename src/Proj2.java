@@ -1,6 +1,4 @@
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -26,6 +24,7 @@ public class Proj2 {
 		System.out.println("Please enter the number of days you want to simulate at the zoo");
 		Scanner input = new Scanner(System.in);
 		int numOfDays = input.nextInt();
+		String[] tasks = {"wake", "exercise", "feed", "call", "sleep"};
 		
 		ZooKeeper keeper = new ZooKeeper();
 		Animal[] zoo = new Animal[20];
@@ -54,6 +53,7 @@ public class Proj2 {
 		zoo[18] = new Goat("Gary the Goat");
 		zoo[19] = new Goat("Grayson the Goat");
 		
+// Strategy pattern used to define behavior at instantiation
 		for(Animal x:zoo) {
 			double wakeup = Math.random();
 			if(wakeup < .5) {
@@ -68,25 +68,19 @@ public class Proj2 {
 		
 	
 		for(int day = 0; day < numOfDays; day++) {
-			ZooClock dayClock = new ZooClock();
+//			ZooClock dayClock = new ZooClock();
 			String strDay = String.valueOf(day+1); 
 			keeper.goToWork(strDay);
-			
-			//Polymorphism: although all of these objects in the zoo are different species
-			//they are all still animals, so can call the same methods. 
-			for(Animal x: zoo) {
-				dayClock.announceTime();
-				keeper.wakeUpAnimal(x.getName());
-				x.wakeUp();
-				keeper.countAnimal(x.getName());
-				x.makeNoise();
-				keeper.feedAnimal(x.getName());
-				x.eat();
-				keeper.exerciseAnimal(x.getName());
-				x.roam();
-				keeper.sleepAnimal(x.getName());
-				x.sleep();
+			for(String task: tasks) {
+				keeper.setTask(task);
+				for(Animal x:zoo) {
+					keeper.preformTask(task,x.getName());
+					//Polymorphism: although all of these objects in the zoo are different species
+					//they are all still animals, so can call the same methods. 
+					x.preformTask(task);
+				}
 			}
+			
 			keeper.leaveZoo(strDay);
 			System.out.println();
 		}
