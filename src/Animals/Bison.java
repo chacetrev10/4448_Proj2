@@ -1,10 +1,11 @@
+package Animals;
 
 public class Bison extends Bovidae{
-	Bison(String name){
+	public Bison(String name){
 		super.name = name;
 	}
 	@Override
-	void eat() {
+	public void eat() {
 		System.out.println(name + " grazes on grass");
 	}
 }

@@ -1,6 +1,7 @@
+package Animals;
 
 public class Tiger extends Feline{
-	Tiger(String name){
+	public Tiger(String name){
 		super.name = name;
 	}
 }

@@ -1,3 +1,4 @@
+package Zoo;
 //Zoo employee class that contains methods that all zoo employees do.
 //Abstract Class: we never instantiate ZooEmployee, but rather create a subclass
 //that will inherit from ZooEmployee.

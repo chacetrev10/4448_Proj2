@@ -1,7 +1,8 @@
+package Zoo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 
 public class ZooClock {
 	private String timeFormat = "h:mm a";
@@ -9,7 +10,7 @@ public class ZooClock {
 	private String zooOpening = "8:00 am";
 	private Calendar currentTime = Calendar.getInstance();
 	
-	ZooClock() throws ParseException{
+	public ZooClock() throws ParseException{
 		this.currentTime.setTime(time.parse(zooOpening));
 	}
 	

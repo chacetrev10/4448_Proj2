@@ -1,10 +1,8 @@
-
+package Animals;
 public class Pachyderm extends Animal{
-	public Pachyderm() {
-		super.wakeUpBehavior = new StartledWakeUp();
-	}
+	
 	@Override
-	void roam() {
+	public void roam() {
 		//Used this website as a reference to generate random numbers.
 		//https://www.javatpoint.com/how-to-generate-random-number-in-java
 		double charge_chance = Math.random();

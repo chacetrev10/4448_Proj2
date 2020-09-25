@@ -1,6 +1,7 @@
+package Animals;
 
 public class Rhino extends Pachyderm{
-	Rhino(String name){
+	public Rhino(String name){
 		super.name = name;
 	}
 }

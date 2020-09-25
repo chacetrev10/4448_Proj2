@@ -1,11 +1,9 @@
+package Animals;
 
 public class Feline extends Animal{	
 	
-	public Feline() {
-		super.wakeUpBehavior = new PeacefulWakeUp();
-	}
 	@Override
-	void sleep() {
+	public void sleep() {
 		double sleep_chance = Math.random();
 		if (sleep_chance <= 0.3) {
 			System.out.println(name + " roams");

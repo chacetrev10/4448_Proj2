@@ -1,3 +1,6 @@
+package Animals;
+import WakeUpStrategy.WakeUpBehavior;
+
 public class Animal{
 	
 	//Encapsulation: using a protected member variable instead of a public one.
@@ -10,27 +13,31 @@ public class Animal{
 	//give you the oppurtunity to change wakeUp behavior at runtime. 
 	protected WakeUpBehavior wakeUpBehavior;
 	
-	void wakeUp() {
+	public void wakeUp() {
 		wakeUpBehavior.wake();
 	}
 	
-	void setWakeUpBehavior(WakeUpBehavior wakeUp) {
+	public void setWakeUpBehavior(WakeUpBehavior wakeUp) {
 		this.wakeUpBehavior  = wakeUp;
 	}
-	void makeNoise() {
+	public void makeNoise() {
 		System.out.println(name + " makes noise");
 	}
 	
-	void eat() {
+	public void eat() {
 		System.out.println(name + " eats");
 	}
 	
-	void roam() {
+	public void roam() {
 		System.out.println(name + " roams");
 	}
 	
-	void sleep() {
+	public void sleep() {
 		System.out.println(name + " goes to sleep");
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 }

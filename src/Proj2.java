@@ -4,6 +4,22 @@ import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.Scanner;
 
+import Animals.Animal;
+import Animals.Bison;
+import Animals.Cat;
+import Animals.Dog;
+import Animals.Elephant;
+import Animals.Goat;
+import Animals.Hippo;
+import Animals.Lion;
+import Animals.Rhino;
+import Animals.Tiger;
+import Animals.Wolf;
+import WakeUpStrategy.PeacefulWakeUp;
+import WakeUpStrategy.StartledWakeUp;
+import Zoo.ZooClock;
+import Zoo.ZooKeeper;
+
 public class Proj2 {
 	
 	public static void main(String[]args) throws FileNotFoundException, ParseException {
@@ -38,7 +54,14 @@ public class Proj2 {
 		zoo[18] = new Goat("Gary the Goat");
 		zoo[19] = new Goat("Grayson the Goat");
 		
-		
+		for(Animal x:zoo) {
+			double wakeup = Math.random();
+			if(wakeup < .5) {
+				x.setWakeUpBehavior(new StartledWakeUp(x.getName()));
+			}else {
+				x.setWakeUpBehavior(new PeacefulWakeUp(x.getName()));
+			}
+		}
 		
 //	Uncomment this is you want the output printed to a file
 //	Referenced https://stackoverflow.com/questions/1994255/how-to-write-console-output-to-a-txt-file
@@ -53,15 +76,15 @@ public class Proj2 {
 			//they are all still animals, so can call the same methods. 
 			for(Animal x: zoo) {
 				dayClock.announceTime();
-				keeper.wakeUpAnimal(x.name);
+				keeper.wakeUpAnimal(x.getName());
 				x.wakeUp();
-				keeper.countAnimal(x.name);
+				keeper.countAnimal(x.getName());
 				x.makeNoise();
-				keeper.feedAnimal(x.name);
+				keeper.feedAnimal(x.getName());
 				x.eat();
-				keeper.exerciseAnimal(x.name);
+				keeper.exerciseAnimal(x.getName());
 				x.roam();
-				keeper.sleepAnimal(x.name);
+				keeper.sleepAnimal(x.getName());
 				x.sleep();
 			}
 			keeper.leaveZoo(strDay);

@@ -1,6 +1,7 @@
+package Animals;
 
 public class Hippo extends Pachyderm{
-	Hippo(String name){
+	public Hippo(String name){
 		super.name = name;
 	}
 }
