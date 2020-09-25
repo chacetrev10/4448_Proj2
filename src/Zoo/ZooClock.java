@@ -23,4 +23,8 @@ public class ZooClock {
 	public void incrementHour() {
 		currentTime.add(Calendar.HOUR, 1);
 	}
+	
+	public String getCurrentTime() {
+		return time.format(currentTime.getTime());
+	}
 }

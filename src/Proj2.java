@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import Animals.Animal;
@@ -26,8 +28,12 @@ public class Proj2 {
 		System.out.println("Please enter the number of days you want to simulate at the zoo");
 		Scanner input = new Scanner(System.in);
 		int numOfDays = input.nextInt();
-		String[] tasks = { "wake", "exercise", "feed", "call", "sleep" };
-
+		Map<String,String> timeToTask = new HashMap<String,String>();
+		timeToTask.put("9:00 AM", "wake");
+		timeToTask.put("11:00 AM", "exercise");
+		timeToTask.put("1:00 PM", "feed");
+		timeToTask.put("5:00 PM", "call");
+		timeToTask.put("8:00 PM", "sleep");
 		ZooKeeper keeper = new ZooKeeper();
 		Animal[] zoo = new Animal[20];
 
@@ -67,23 +73,26 @@ public class Proj2 {
 
 //	Uncomment this is you want the output printed to a file
 //	Referenced https://stackoverflow.com/questions/1994255/how-to-write-console-output-to-a-txt-file
-		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
-		System.setOut(out);
+//		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
+//		System.setOut(out);
 
 		for (int day = 0; day < numOfDays; day++) {
-//			ZooClock dayClock = new ZooClock();
+			ZooClock dayClock = new ZooClock();
 			String strDay = String.valueOf(day + 1);
 			keeper.goToWork(strDay);
-			for (String task : tasks) {
-				keeper.setTask(task);
-				for (Animal x : zoo) {
-					keeper.preformTask(task, x.getName());
-					// Polymorphism: although all of these objects in the zoo are different species
-					// they are all still animals, so can call the same methods.
-					x.preformTask(task);
+			while(!dayClock.getCurrentTime().equals("9:00 PM")) {
+				String currentTime = dayClock.getCurrentTime();
+				dayClock.announceTime();
+				if(timeToTask.containsKey(currentTime)) {
+					for (Animal x : zoo) {
+						keeper.preformTask(timeToTask.get(currentTime), x.getName());
+						// Polymorphism: although all of these objects in the zoo are different species
+						// they are all still animals, so can call the same methods.
+						x.preformTask(timeToTask.get(currentTime));
+					}
 				}
+				
 			}
-
 			keeper.leaveZoo(strDay);
 			System.out.println();
 		}
