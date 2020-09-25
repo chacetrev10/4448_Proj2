@@ -1,4 +1,6 @@
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.text.ParseException;
 import java.util.Scanner;
 
@@ -19,19 +21,19 @@ import Zoo.ZooClock;
 import Zoo.ZooKeeper;
 
 public class Proj2 {
-	
-	public static void main(String[]args) throws FileNotFoundException, ParseException {
+
+	public static void main(String[] args) throws FileNotFoundException, ParseException {
 		System.out.println("Please enter the number of days you want to simulate at the zoo");
 		Scanner input = new Scanner(System.in);
 		int numOfDays = input.nextInt();
-		String[] tasks = {"wake", "exercise", "feed", "call", "sleep"};
-		
+		String[] tasks = { "wake", "exercise", "feed", "call", "sleep" };
+
 		ZooKeeper keeper = new ZooKeeper();
 		Animal[] zoo = new Animal[20];
-		
-		//Identity: These objects are all created and have a unique location in the 
-		//zoo array and also have a unique name, giving them a unique identity and
-		//spot in memory.
+
+		// Identity: These objects are all created and have a unique location in the
+		// zoo array and also have a unique name, giving them a unique identity and
+		// spot in memory.
 		zoo[0] = new Hippo("Harry the Hippo");
 		zoo[1] = new Hippo("Hector the Hippo");
 		zoo[2] = new Elephant("Eugene the Elephant");
@@ -52,38 +54,38 @@ public class Proj2 {
 		zoo[17] = new Bison("Brandon the Bison");
 		zoo[18] = new Goat("Gary the Goat");
 		zoo[19] = new Goat("Grayson the Goat");
-		
+
 // Strategy pattern used to define behavior at instantiation
-		for(Animal x:zoo) {
+		for (Animal x : zoo) {
 			double wakeup = Math.random();
-			if(wakeup < .5) {
+			if (wakeup < .5) {
 				x.setWakeUpBehavior(new StartledWakeUp(x.getName()));
-			}else {
+			} else {
 				x.setWakeUpBehavior(new PeacefulWakeUp(x.getName()));
 			}
 		}
-		
+
 //	Uncomment this is you want the output printed to a file
 //	Referenced https://stackoverflow.com/questions/1994255/how-to-write-console-output-to-a-txt-file
-		
-	
-		for(int day = 0; day < numOfDays; day++) {
+		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
+		System.setOut(out);
+
+		for (int day = 0; day < numOfDays; day++) {
 //			ZooClock dayClock = new ZooClock();
-			String strDay = String.valueOf(day+1); 
+			String strDay = String.valueOf(day + 1);
 			keeper.goToWork(strDay);
-			for(String task: tasks) {
+			for (String task : tasks) {
 				keeper.setTask(task);
-				for(Animal x:zoo) {
-					keeper.preformTask(task,x.getName());
-					//Polymorphism: although all of these objects in the zoo are different species
-					//they are all still animals, so can call the same methods. 
+				for (Animal x : zoo) {
+					keeper.preformTask(task, x.getName());
+					// Polymorphism: although all of these objects in the zoo are different species
+					// they are all still animals, so can call the same methods.
 					x.preformTask(task);
 				}
 			}
-			
+
 			keeper.leaveZoo(strDay);
 			System.out.println();
 		}
 	}
 }
-
