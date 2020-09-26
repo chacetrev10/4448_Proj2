@@ -35,6 +35,7 @@ public class Proj2 {
 		timeToTask.put("5:00 PM", "call");
 		timeToTask.put("8:00 PM", "sleep");
 		ZooKeeper keeper = new ZooKeeper();
+		ZooFoodServer server = new ZooFoodServer();
 		Animal[] zoo = new Animal[20];
 
 		// Identity: These objects are all created and have a unique location in the
