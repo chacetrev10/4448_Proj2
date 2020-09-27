@@ -21,25 +21,27 @@ public class ZooFoodServer extends ZooEmployee {
 	}
 
 	public void setTask(String newTask) {
-		support.firePropertyChange("task", this.task, newTask);
+		if(newTask.equals("making food")) {
+			support.firePropertyChange("task", this.task, newTask);
+		}
 		this.task = newTask;
 	}
 
 	
 	@Override
-	void goToWork(String day) {
+	public void goToWork(String day) {
 		System.out.println("The ZooFoodServer arrives to zoo on day " + day);
 	}
 	
-	void makeFood() {
+	public void makeFood() {
 		System.out.println("The ZooFoodServer is making food");
 	}
 	
-	void serveFood() {
+	public void serveFood() {
 		System.out.println("The ZooFoodServer is serving food");
 	}
 	
-	void clean() {
+	public void clean() {
 		System.out.println("The ZooFoodServer is cleaning");
 	}
 	

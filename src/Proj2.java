@@ -21,6 +21,7 @@ import WakeUpStrategy.PeacefulWakeUp;
 import WakeUpStrategy.StartledWakeUp;
 import Zoo.ZooAnouncer;
 import Zoo.ZooClock;
+import Zoo.ZooFoodServer;
 import Zoo.ZooKeeper;
 
 public class Proj2 {
@@ -32,6 +33,7 @@ public class Proj2 {
 		Map<String,String> timeToTask = new HashMap<String,String>();
 		timeToTask.put("9:00 AM", "wake");
 		timeToTask.put("11:00 AM", "exercise");
+		timeToTask.put("12:00 PM", "making food");
 		timeToTask.put("1:00 PM", "feed");
 		timeToTask.put("5:00 PM", "call");
 		timeToTask.put("8:00 PM", "sleep");
@@ -86,11 +88,11 @@ public class Proj2 {
 			//define observer and register it to the subject
 			ZooAnouncer announcer = new ZooAnouncer();
 			keeper.addPropertyChangeListener(announcer);
+			server.addPropertyChangeListener(announcer);
 			while(!dayClock.getCurrentTime().equals("9:00 PM")) {
 				String currentTime = dayClock.getCurrentTime();
 				dayClock.announceTime();
-				if(timeToTask.containsKey(currentTime)) {
-				
+				if(timeToTask.containsKey(currentTime) && !currentTime.equals("12:00 PM")) {
 					for (Animal x : zoo) {
 						keeper.setTask(timeToTask.get(currentTime));
 						keeper.preformTask(timeToTask.get(currentTime), x.getName());
@@ -98,6 +100,8 @@ public class Proj2 {
 						// they are all still animals, so can call the same methods.
 						x.preformTask(timeToTask.get(currentTime));
 					}
+				}else if(timeToTask.containsKey(currentTime) && currentTime.equals("12:00 PM")) {
+					server.setTask(timeToTask.get(currentTime));
 				}
 				
 			}
