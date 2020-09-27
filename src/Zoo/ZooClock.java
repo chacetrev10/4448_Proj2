@@ -20,7 +20,7 @@ public class ZooClock {
 		
 	}
 	
-	public void incrementHour() {
+	private void incrementHour() {
 		currentTime.add(Calendar.HOUR, 1);
 	}
 	

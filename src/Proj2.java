@@ -19,6 +19,7 @@ import Animals.Tiger;
 import Animals.Wolf;
 import WakeUpStrategy.PeacefulWakeUp;
 import WakeUpStrategy.StartledWakeUp;
+import Zoo.ZooAnouncer;
 import Zoo.ZooClock;
 import Zoo.ZooKeeper;
 
@@ -80,11 +81,17 @@ public class Proj2 {
 			ZooClock dayClock = new ZooClock();
 			String strDay = String.valueOf(day + 1);
 			keeper.goToWork(strDay);
+			
+			//define observer and register it to the subject
+			ZooAnouncer announcer = new ZooAnouncer();
+			keeper.addPropertyChangeListener(announcer);
 			while(!dayClock.getCurrentTime().equals("9:00 PM")) {
 				String currentTime = dayClock.getCurrentTime();
 				dayClock.announceTime();
 				if(timeToTask.containsKey(currentTime)) {
+				
 					for (Animal x : zoo) {
+						keeper.setTask(timeToTask.get(currentTime));
 						keeper.preformTask(timeToTask.get(currentTime), x.getName());
 						// Polymorphism: although all of these objects in the zoo are different species
 						// they are all still animals, so can call the same methods.
@@ -94,6 +101,7 @@ public class Proj2 {
 				
 			}
 			keeper.leaveZoo(strDay);
+			keeper.removePropertyChangeListener(announcer);
 			System.out.println();
 		}
 	}
