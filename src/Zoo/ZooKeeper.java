@@ -57,10 +57,6 @@ public class ZooKeeper extends ZooEmployee {
 		System.out.println(name + " is counted for roll call");
 	}
 
-	public String getTask() {
-		return task;
-	}
-
 	public void preformTask(String task, String name) {
 		switch (task) {
 		case "wake":
