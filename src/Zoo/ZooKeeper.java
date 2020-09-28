@@ -8,6 +8,7 @@ import Animals.Animal;
 public class ZooKeeper extends ZooEmployee {
 
 	private String task;
+	//Observer pattern:
 //used https://www.baeldung.com/java-observer-pattern to learn about the propertyChangeSupport as observable
 	private PropertyChangeSupport support;
 
@@ -15,6 +16,8 @@ public class ZooKeeper extends ZooEmployee {
 		support = new PropertyChangeSupport(this);
 	}
 
+	//Handle tasks as passed to the observable
+	//These tasks are observed by the observer
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
@@ -57,6 +60,7 @@ public class ZooKeeper extends ZooEmployee {
 		System.out.println(name + " is counted for roll call");
 	}
 
+	//Keep track of which task executes which function
 	public void preformTask(String task, String name) {
 		switch (task) {
 		case "wake":
@@ -70,6 +74,7 @@ public class ZooKeeper extends ZooEmployee {
 			break;
 		case "call":
 			countAnimal(name);
+			break;
 		case "sleep":
 			sleepAnimal(name);
 			break;

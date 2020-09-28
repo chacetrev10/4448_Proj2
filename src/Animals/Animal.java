@@ -58,6 +58,7 @@ public class Animal {
 			break;
 		case "call":
 			makeNoise();
+			break;
 		case "sleep":
 			sleep();
 			break;

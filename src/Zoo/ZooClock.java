@@ -14,16 +14,19 @@ public class ZooClock {
 		this.currentTime.setTime(time.parse(zooOpening));
 	}
 	
+	//Announce current time of day to zoo
 	public void announceTime() {
 		System.out.println("It is " + time.format(currentTime.getTime()));
 		incrementHour();
 		
 	}
 	
+	//Increment time of day by 1 hour
 	private void incrementHour() {
 		currentTime.add(Calendar.HOUR, 1);
 	}
 	
+	//Get the current time of day
 	public String getCurrentTime() {
 		return time.format(currentTime.getTime());
 	}

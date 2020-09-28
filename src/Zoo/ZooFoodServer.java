@@ -5,6 +5,7 @@ import java.beans.PropertyChangeSupport;
 
 public class ZooFoodServer extends ZooEmployee {
 	private String task;
+	//Observer pattern:
 	//used https://www.baeldung.com/java-observer-pattern to learn about the propertyChangeSupport as observable
 	private PropertyChangeSupport support;
 	
@@ -12,6 +13,8 @@ public class ZooFoodServer extends ZooEmployee {
 		support = new PropertyChangeSupport(this);
 	}
 
+	//Handle tasks as passed to the observable
+	//These tasks are observed by the observer
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
@@ -50,9 +53,10 @@ public class ZooFoodServer extends ZooEmployee {
 		System.out.println("ZooFoodServer leaves zoo on day " + day);
 	}
 	
-	public void preformTask(String task, String name) {
+	//Keep track of which task executes which function
+	public void preformTask(String task) {
 		switch (task) {
-		case "make":
+		case "making food":
 			makeFood();
 			break;
 		case "serve":

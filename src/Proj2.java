@@ -30,13 +30,22 @@ public class Proj2 {
 		System.out.println("Please enter the number of days you want to simulate at the zoo");
 		Scanner input = new Scanner(System.in);
 		int numOfDays = input.nextInt();
+		
+		//A hashmap of times of day keeps track of which tasks need to be executed and when
 		Map<String,String> timeToTask = new HashMap<String,String>();
 		timeToTask.put("9:00 AM", "wake");
-		timeToTask.put("11:00 AM", "exercise");
-		timeToTask.put("12:00 PM", "making food");
+		timeToTask.put("10:00 AM", "exercise");
+		timeToTask.put("11:00 AM", "making food");
+		timeToTask.put("12:00 PM", "serve");
 		timeToTask.put("1:00 PM", "feed");
-		timeToTask.put("5:00 PM", "call");
+		timeToTask.put("2:00 PM", "clean");
+		timeToTask.put("4:00 PM", "making food");
+		timeToTask.put("5:00 PM", "serve");
+		timeToTask.put("6:00 PM", "call");
+		timeToTask.put("7:00 PM", "clean");
 		timeToTask.put("8:00 PM", "sleep");
+		
+		//Create the zoo keeper, food server, and animal array
 		ZooKeeper keeper = new ZooKeeper();
 		ZooFoodServer server = new ZooFoodServer();
 		Animal[] zoo = new Animal[20];
@@ -75,24 +84,33 @@ public class Proj2 {
 			}
 		}
 
-//	Uncomment this is you want the output printed to a file
+//	Uncomment this if you want the output printed to a file
 //	Referenced https://stackoverflow.com/questions/1994255/how-to-write-console-output-to-a-txt-file
 //		PrintStream out = new PrintStream(new FileOutputStream("dayatthezoo.out"));
 //		System.setOut(out);
 
+		//Loop through the number of days that the user input and perform all zoo activities
 		for (int day = 0; day < numOfDays; day++) {
 			ZooClock dayClock = new ZooClock();
 			String strDay = String.valueOf(day + 1);
 			keeper.goToWork(strDay);
+			server.goToWork(strDay);
 			
 			//define observer and register it to the subject
 			ZooAnouncer announcer = new ZooAnouncer();
+			announcer.goToWork(strDay);
 			keeper.addPropertyChangeListener(announcer);
 			server.addPropertyChangeListener(announcer);
+			
+			//Loop through the hours the zoo is open
 			while(!dayClock.getCurrentTime().equals("9:00 PM")) {
 				String currentTime = dayClock.getCurrentTime();
 				dayClock.announceTime();
+				
+				//When it's time, the announcer observes the zoo keeper or food server
+				//performing certain tasks and alerts the zoo
 				if(timeToTask.containsKey(currentTime) && !currentTime.equals("12:00 PM")) {
+					//The zoo keeper must perform his tasks for all the animals
 					for (Animal x : zoo) {
 						keeper.setTask(timeToTask.get(currentTime));
 						keeper.preformTask(timeToTask.get(currentTime), x.getName());
@@ -100,13 +118,20 @@ public class Proj2 {
 						// they are all still animals, so can call the same methods.
 						x.preformTask(timeToTask.get(currentTime));
 					}
+					server.setTask(timeToTask.get(currentTime));
+					server.preformTask(timeToTask.get(currentTime));
 				}else if(timeToTask.containsKey(currentTime) && currentTime.equals("12:00 PM")) {
 					server.setTask(timeToTask.get(currentTime));
+					server.preformTask(timeToTask.get(currentTime));
 				}
 				
 			}
+			//The employees can leave for the day and the announcer can stop observing them
 			keeper.leaveZoo(strDay);
 			keeper.removePropertyChangeListener(announcer);
+			server.leaveZoo(strDay);
+			server.removePropertyChangeListener(announcer);
+			announcer.leaveZoo(strDay);
 			System.out.println();
 		}
 	}
