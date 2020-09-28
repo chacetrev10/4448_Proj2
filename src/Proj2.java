@@ -109,7 +109,7 @@ public class Proj2 {
 				
 				//When it's time, the announcer observes the zoo keeper or food server
 				//performing certain tasks and alerts the zoo
-				if(timeToTask.containsKey(currentTime) && !currentTime.equals("12:00 PM")) {
+				if(timeToTask.containsKey(currentTime) ) {
 					//The zoo keeper must perform his tasks for all the animals
 					for (Animal x : zoo) {
 						keeper.setTask(timeToTask.get(currentTime));
@@ -118,9 +118,6 @@ public class Proj2 {
 						// they are all still animals, so can call the same methods.
 						x.preformTask(timeToTask.get(currentTime));
 					}
-					server.setTask(timeToTask.get(currentTime));
-					server.preformTask(timeToTask.get(currentTime));
-				}else if(timeToTask.containsKey(currentTime) && currentTime.equals("12:00 PM")) {
 					server.setTask(timeToTask.get(currentTime));
 					server.preformTask(timeToTask.get(currentTime));
 				}
