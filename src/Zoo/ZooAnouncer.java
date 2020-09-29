@@ -11,10 +11,10 @@ public class ZooAnouncer extends ZooEmployee implements PropertyChangeListener {
 	
 	public void propertyChange(PropertyChangeEvent event) {
 		if(event.getNewValue().equals("serve")) {
-			System.out.println("The zooFoodServer is about to serve food!");
+			System.out.println("Hi this is the announcer, The zooFoodServer is about to serve food!");
 		}
 		else if(!event.getNewValue().equals("making food") && !event.getNewValue().equals("clean")) {
-			System.out.println("The zookeeper is about to "+ event.getNewValue() + " the animals!");
+			System.out.println("Hi this is the announcer, The zookeeper is about to "+ event.getNewValue() + " the animals!");
 		}
 	}
 
